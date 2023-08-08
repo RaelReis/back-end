@@ -55,4 +55,12 @@ export class UserApi extends RESTDataSource {
   async deleteWeekly(weeklyId: string) {
     return this.delete<Diary[]>(`/weeklies/${weeklyId}`);
   }
+
+  async verifyDiary(diaryId: string) {
+    return this.get(`/diaries/${diaryId}`);
+  }
+
+  async verifyWeekly(weeklyId: string) {
+    return this.get(`/weeklies/${weeklyId}`);
+  }
 }

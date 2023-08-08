@@ -9,13 +9,18 @@ export const userTypeDefs = gql`
   }
 
   extend type Mutation {
-    createDiary(data: CreateDiaryInput!): DiaryAndWeekly!
-    updateDiary(id: String!, data: UpdateDiaryInput!): DiaryAndWeekly!
+    createDiary(newDiary: CreateDiaryInput!): DiaryAndWeekly!
+    updateDiary(id: String!, updatedDiary: UpdateDiaryInput!): DiaryAndWeekly!
     deleteDiary(id: String!): Boolean!
 
-    createWeekly(data: CreateWeeklyInput!): DiaryAndWeekly!
-    updateWeekly(id: String!, data: UpdateWeeklyInput!): DiaryAndWeekly!
+    createWeekly(newWeekly: CreateWeeklyInput!): DiaryAndWeekly!
+    updateWeekly(
+      id: String!
+      updatedWeekly: UpdateWeeklyInput!
+    ): DiaryAndWeekly!
     deleteWeekly(id: String!): Boolean!
+
+    updateMetaIsCompleted(id: String!, metaType: MetaTypeInput): DiaryAndWeekly!
   }
 
   type User {
@@ -38,6 +43,11 @@ export const userTypeDefs = gql`
     resetDay: String!
     createdAt: String!
     updatedAt: String!
+  }
+
+  enum MetaTypeInput {
+    diary
+    weekly
   }
 
   input CreateDiaryInput {

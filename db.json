@@ -43,9 +43,9 @@
       "title": "Teste",
       "description": "Teste",
       "resetDay": "asfklnajkfna",
-      "isCompleted": false,
+      "isCompleted": true,
       "createdAt": "2023-08-07T18:41:46.762Z",
-      "updatedAt": "2023-08-07T18:41:46.762Z",
+      "updatedAt": "2023-08-08T20:10:12.059Z",
       "id": "zD8EbZh"
     },
     {
@@ -97,6 +97,26 @@
       "createdAt": "2023-08-07T19:00:13.170Z",
       "updatedAt": "2023-08-07T19:00:13.170Z",
       "id": "Wm_2cYH"
+    },
+    {
+      "userId": "2",
+      "title": "Garmoth",
+      "description": "Matar 3 vezes",
+      "resetDay": "amanha",
+      "isCompleted": false,
+      "createdAt": "2023-08-08T19:34:05.109Z",
+      "updatedAt": "2023-08-08T19:34:05.109Z",
+      "id": "3z9l0j9"
+    },
+    {
+      "userId": "1",
+      "title": "alhp",
+      "description": "descrp alhp",
+      "resetDay": "agra",
+      "isCompleted": false,
+      "createdAt": "2023-08-08T21:10:09.017Z",
+      "updatedAt": "2023-08-08T21:10:09.017Z",
+      "id": "ALE0_dj"
     }
   ],
   "weeklies": [

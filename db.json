@@ -1,0 +1,114 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "discord_id": "51651651398415",
+      "username": "Kelon",
+      "avatar": "fsadkgaslçgm,çfasdf",
+      "createdAt": "2023-08-07T15:35:25.993Z",
+      "updatedAt": "2023-08-07T15:35:25.993Z"
+    },
+    {
+      "id": "2",
+      "discord_id": "51651651398415",
+      "username": "Kleie",
+      "avatar": "fsadkgaslçgm,çfasdf",
+      "createdAt": "2023-08-07T15:35:25.993Z",
+      "updatedAt": "2023-08-07T15:35:25.993Z"
+    }
+  ],
+  "diaries": [
+    {
+      "id": "OPLionYTVYV",
+      "userId": "1",
+      "title": "Jettina",
+      "description": "Descrição aqui",
+      "isCompleted": false,
+      "resetDay": "2023-08-07T15:45:25.993Z",
+      "createdAt": "2023-08-07T15:38:04.633Z",
+      "updatedAt": "2023-08-07T15:38:04.633Z"
+    },
+    {
+      "id": "KByFVUYHbhjkBTYU9",
+      "userId": "1",
+      "title": "Jettina",
+      "description": "Descrição aqui",
+      "isCompleted": false,
+      "resetDay": "2023-08-07T15:45:25.993Z",
+      "createdAt": "2023-08-07T15:38:04.633Z",
+      "updatedAt": "2023-08-07T15:38:04.633Z"
+    },
+    {
+      "userId": "2",
+      "title": "Teste",
+      "description": "Teste",
+      "resetDay": "asfklnajkfna",
+      "isCompleted": false,
+      "createdAt": "2023-08-07T18:41:46.762Z",
+      "updatedAt": "2023-08-07T18:41:46.762Z",
+      "id": "zD8EbZh"
+    },
+    {
+      "userId": "2",
+      "title": "Teste",
+      "description": "Teste",
+      "resetDay": "asfklnajkfna",
+      "isCompleted": false,
+      "createdAt": "2023-08-07T18:41:56.520Z",
+      "updatedAt": "2023-08-07T18:41:56.520Z",
+      "id": "27bkqYp"
+    },
+    {
+      "userId": "2",
+      "title": "Teste",
+      "description": "Teste",
+      "resetDay": "asfklnajkfna",
+      "isCompleted": false,
+      "createdAt": "2023-08-07T18:54:45.846Z",
+      "updatedAt": "2023-08-07T18:54:45.846Z",
+      "id": "9aFRpJN"
+    },
+    {
+      "userId": "2",
+      "title": "Teste",
+      "description": "Teste",
+      "resetDay": "asfklnajkfna",
+      "isCompleted": false,
+      "createdAt": "2023-08-07T18:58:05.876Z",
+      "updatedAt": "2023-08-07T18:58:05.876Z",
+      "id": "IZwt7-R"
+    },
+    {
+      "userId": "2",
+      "title": "Teste",
+      "description": "Teste",
+      "resetDay": "asfklnajkfna",
+      "isCompleted": false,
+      "createdAt": "2023-08-07T19:00:00.212Z",
+      "updatedAt": "2023-08-07T19:00:00.212Z",
+      "id": "yQsup7P"
+    },
+    {
+      "userId": "2",
+      "title": "Teste",
+      "description": "Teste",
+      "resetDay": "asfklnajkfna",
+      "isCompleted": false,
+      "createdAt": "2023-08-07T19:00:13.170Z",
+      "updatedAt": "2023-08-07T19:00:13.170Z",
+      "id": "Wm_2cYH"
+    }
+  ],
+  "weeklies": [
+    {
+      "id": "OPLionYTVYV",
+      "userId": "1",
+      "title": "Jettina",
+      "description": "Descrição aqui",
+      "isCompleted": false,
+      "resetDay": "2023-08-07T15:45:25.993Z",
+      "createdAt": "2023-08-07T15:38:04.633Z",
+      "updatedAt": "2023-08-07T15:38:04.633Z"
+    }
+  ]
+}

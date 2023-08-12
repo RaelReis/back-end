@@ -1,6 +1,4 @@
-import { gql } from "apollo-server";
-
-export const userTypeDefs = gql`
+export const userTypeDefs = `#graphql
   extend type Query {
     user(id: String!): User!
     users: [User!]!
@@ -9,15 +7,12 @@ export const userTypeDefs = gql`
   }
 
   extend type Mutation {
-    createDiary(newDiary: CreateDiaryInput!): DiaryAndWeekly!
+    createDiary(userId:String!, newDiary: CreateDiaryInput!): DiaryAndWeekly!
     updateDiary(id: String!, updatedDiary: UpdateDiaryInput!): DiaryAndWeekly!
     deleteDiary(id: String!): Boolean!
 
-    createWeekly(newWeekly: CreateWeeklyInput!): DiaryAndWeekly!
-    updateWeekly(
-      id: String!
-      updatedWeekly: UpdateWeeklyInput!
-    ): DiaryAndWeekly!
+    createWeekly(userId:String!, newWeekly: CreateWeeklyInput!): DiaryAndWeekly!
+    updateWeekly(id: String!, updatedWeekly: UpdateWeeklyInput!): DiaryAndWeekly!
     deleteWeekly(id: String!): Boolean!
 
     updateMetaIsCompleted(id: String!, metaType: MetaTypeInput): DiaryAndWeekly!
@@ -51,7 +46,6 @@ export const userTypeDefs = gql`
   }
 
   input CreateDiaryInput {
-    userId: String!
     title: String!
     description: String!
     resetDay: String!
@@ -65,7 +59,6 @@ export const userTypeDefs = gql`
   }
 
   input CreateWeeklyInput {
-    userId: String!
     title: String!
     description: String!
     resetDay: String!

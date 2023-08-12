@@ -1,20 +1,21 @@
-import { ValidationError } from "apollo-server";
-import { Context } from "../../context";
-import { Diary } from "../models/Diaries";
+import { Context } from "../../server";
 
 export const resolvers = {
-  createDiary: async (_: any, { newDiary }: any, { userApi }: Context) => {
-    const { userId } = newDiary;
-
+  createDiary: async (
+    _: any,
+    { userId, newDiary }: any,
+    { userApi }: Context
+  ) => {
     try {
       await userApi.getUser(userId);
     } catch (error) {
-      throw new ValidationError(`User ID ${userId} not found`);
+      throw new Error(`User ID ${userId} not found`);
     }
 
     // Back end fara isso automaticamente depois
     const diary = {
       ...newDiary,
+      userId,
       isCompleted: false,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -39,16 +40,27 @@ export const resolvers = {
     const res = await userApi.deleteDiary(id);
     return !!res;
   },
-  createWeekly: async (_: any, { data }: any, { userApi }: Context) => {
+  createWeekly: async (
+    _: any,
+    { userId, newWeekly }: any,
+    { userApi }: Context
+  ) => {
+    try {
+      await userApi.getUser(userId);
+    } catch (error) {
+      throw new Error(`User ID ${userId} not found`);
+    }
+
     // Back end fara isso automaticamente depois
-    const newWeekly = {
-      ...data,
+    const weekly = {
+      ...newWeekly,
+      userId,
       isCompleted: false,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
 
-    const res = await userApi.createWeekly(newWeekly);
+    const res = await userApi.createWeekly(weekly);
     return res;
   },
   updateWeekly: async (_: any, args: any, { userApi }: Context) => {
@@ -83,7 +95,7 @@ export const resolvers = {
 
         newMeta = await userApi.updateDiary(id, changedDiary);
       } catch (error) {
-        throw new ValidationError(`Diary ID not found`);
+        throw new Error(`Diary ID not found`);
       }
     }
 
@@ -98,7 +110,7 @@ export const resolvers = {
 
         newMeta = await userApi.updateWeekly(id, changedWeekly);
       } catch (error) {
-        throw new ValidationError(`Weekly ID not found`);
+        throw new Error(`Weekly ID not found`);
       }
     }
 

@@ -25,6 +25,10 @@ export class UserApi extends RESTDataSource {
     });
   }
 
+  async createUser(data: any) {
+    return this.post("/users", { body: data });
+  }
+
   async createDiary(data: any) {
     return this.post<Diary[]>("/diaries", { body: data });
   }

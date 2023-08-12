@@ -1,4 +1,4 @@
-import { Context } from "../../context";
+import { Context } from "../../server";
 
 const resolvers = {
   user: async (_: any, { id }: any, { userApi }: Context) => {

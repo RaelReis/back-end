@@ -15,120 +15,16 @@
       "avatar": "fsadkgaslçgm,çfasdf",
       "createdAt": "2023-08-07T15:35:25.993Z",
       "updatedAt": "2023-08-07T15:35:25.993Z"
+    },
+    {
+      "discord_id": "326516025652936705",
+      "username": "kelon._",
+      "avatar": "3cd69e94422177ea8ed2e49eb4bfb040",
+      "createdAt": "2023-08-12T18:32:26.312Z",
+      "updatedAt": "2023-08-12T18:32:26.312Z",
+      "id": "s6CmfOz"
     }
   ],
-  "diaries": [
-    {
-      "id": "OPLionYTVYV",
-      "userId": "1",
-      "title": "Jettina",
-      "description": "Descrição aqui",
-      "isCompleted": false,
-      "resetDay": "2023-08-07T15:45:25.993Z",
-      "createdAt": "2023-08-07T15:38:04.633Z",
-      "updatedAt": "2023-08-07T15:38:04.633Z"
-    },
-    {
-      "id": "KByFVUYHbhjkBTYU9",
-      "userId": "1",
-      "title": "Jettina",
-      "description": "Descrição aqui",
-      "isCompleted": false,
-      "resetDay": "2023-08-07T15:45:25.993Z",
-      "createdAt": "2023-08-07T15:38:04.633Z",
-      "updatedAt": "2023-08-07T15:38:04.633Z"
-    },
-    {
-      "userId": "2",
-      "title": "Teste",
-      "description": "Teste",
-      "resetDay": "asfklnajkfna",
-      "isCompleted": true,
-      "createdAt": "2023-08-07T18:41:46.762Z",
-      "updatedAt": "2023-08-08T20:10:12.059Z",
-      "id": "zD8EbZh"
-    },
-    {
-      "userId": "2",
-      "title": "Teste",
-      "description": "Teste",
-      "resetDay": "asfklnajkfna",
-      "isCompleted": false,
-      "createdAt": "2023-08-07T18:41:56.520Z",
-      "updatedAt": "2023-08-07T18:41:56.520Z",
-      "id": "27bkqYp"
-    },
-    {
-      "userId": "2",
-      "title": "Teste",
-      "description": "Teste",
-      "resetDay": "asfklnajkfna",
-      "isCompleted": false,
-      "createdAt": "2023-08-07T18:54:45.846Z",
-      "updatedAt": "2023-08-07T18:54:45.846Z",
-      "id": "9aFRpJN"
-    },
-    {
-      "userId": "2",
-      "title": "Teste",
-      "description": "Teste",
-      "resetDay": "asfklnajkfna",
-      "isCompleted": false,
-      "createdAt": "2023-08-07T18:58:05.876Z",
-      "updatedAt": "2023-08-07T18:58:05.876Z",
-      "id": "IZwt7-R"
-    },
-    {
-      "userId": "2",
-      "title": "Teste",
-      "description": "Teste",
-      "resetDay": "asfklnajkfna",
-      "isCompleted": false,
-      "createdAt": "2023-08-07T19:00:00.212Z",
-      "updatedAt": "2023-08-07T19:00:00.212Z",
-      "id": "yQsup7P"
-    },
-    {
-      "userId": "2",
-      "title": "Teste",
-      "description": "Teste",
-      "resetDay": "asfklnajkfna",
-      "isCompleted": false,
-      "createdAt": "2023-08-07T19:00:13.170Z",
-      "updatedAt": "2023-08-07T19:00:13.170Z",
-      "id": "Wm_2cYH"
-    },
-    {
-      "userId": "2",
-      "title": "Garmoth",
-      "description": "Matar 3 vezes",
-      "resetDay": "amanha",
-      "isCompleted": false,
-      "createdAt": "2023-08-08T19:34:05.109Z",
-      "updatedAt": "2023-08-08T19:34:05.109Z",
-      "id": "3z9l0j9"
-    },
-    {
-      "userId": "1",
-      "title": "alhp",
-      "description": "descrp alhp",
-      "resetDay": "agra",
-      "isCompleted": false,
-      "createdAt": "2023-08-08T21:10:09.017Z",
-      "updatedAt": "2023-08-08T21:10:09.017Z",
-      "id": "ALE0_dj"
-    }
-  ],
-  "weeklies": [
-    {
-      "id": "OPLionYTVYV",
-      "userId": "1",
-      "title": "Jettina",
-      "description": "Descrição aqui",
-      "isCompleted": false,
-      "resetDay": "2023-08-07T15:45:25.993Z",
-      "createdAt": "2023-08-07T15:38:04.633Z",
-      "updatedAt": "2023-08-07T15:38:04.633Z"
-    }
-  ]
+  "diaries": [],
+  "weeklies": []
 }

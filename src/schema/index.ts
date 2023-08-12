@@ -1,11 +1,9 @@
-import { gql } from "apollo-server";
-
 import { userTypeDefs } from "./typeDefs";
 import { queryResolvers } from "../data/resolvers/queryResolvers";
 import { fieldResolvers } from "../data/resolvers/fieldResolvers";
 import { mutationResolvers } from "../data/resolvers/mutationResolvers";
 
-const rootTypeDefs = gql`
+const rootTypeDefs = `#graphql
   type Query {
     _empty: Boolean
   }

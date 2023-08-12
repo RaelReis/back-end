@@ -1,4 +1,4 @@
-import { Context } from "../../context";
+import { Context } from "../../server";
 
 const userFieldResolvers = {
   diaries: async ({ id: userId }: any, _: any, { userApi }: Context) => {

@@ -6,20 +6,45 @@ import { resolvers, typeDefs } from "./schema";
 import { UserApi } from "./data/dataSources/userApi";
 import axios from "axios";
 import { sign, verify } from "jsonwebtoken";
-import { expressjwt } from "express-jwt";
-import { GraphQLError } from "graphql";
 import { User } from "./data/models/User";
+import coockieParser from "cookie-parser";
+import { GraphQLError } from "graphql";
 
 export interface Context {
   userApi: UserApi;
   user: User;
 }
 
+export interface ReqUser {
+  id: string | null;
+}
+
+declare global {
+  namespace Express {
+    interface Request {
+      user?: ReqUser;
+    }
+  }
+}
+
 const PORT = 4003;
 
 const app = express();
 
-app.use(cors(), express.json());
+const authMiddleware = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  const token = req.cookies.token?.split(" ")[1];
+
+  try {
+    const { sub } = verify(token, process.env.JWT_SECRET as string) as { sub: string };
+    req.user = { id: sub };
+  } catch (error) {
+    req.user = { id: null };
+  }
+
+  next();
+};
+
+app.use(cors(), express.json(), coockieParser());
 
 const apolloServer = new ApolloServer<Context>({
   typeDefs,
@@ -30,7 +55,7 @@ const apolloServer = new ApolloServer<Context>({
 app.get("/auth/discord/login", (req, res) => {
   const url =
     "https://discord.com/api/oauth2/authorize?client_id=1139723744332501032&redirect_uri=https%3A%2F%2Fe1c1-2804-7f0-b780-97c8-854e-263f-d8dc-40b6.ngrok-free.app%2Fauth%2Fdiscord%2Fcallback&response_type=code&scope=identify";
-  res.redirect(url);
+  res.redirect(301, url);
 });
 
 app.get("/auth/discord/callback", async (req, res) => {
@@ -81,19 +106,30 @@ app.get("/auth/discord/callback", async (req, res) => {
 
   const token = await sign({ sub: id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
 
-  res.json({ token });
+  res.cookie("token", `Bearer ${token}`);
+  res.redirect(301, "http://localhost:5173/home");
 });
 
 apolloServer.start().then(() => {
   app.use(
     "/graphql",
-    expressjwt({ algorithms: ["HS256"], secret: process.env.JWT_SECRET || "" }),
+    authMiddleware,
     apolloMiddleware(apolloServer, {
-      context: async ({ req, res }) => {
-        const token = req.headers.authorization;
+      context: async ({ req }) => {
+        const { id } = req.user as { id: string };
+
+        if (!id) {
+          throw new GraphQLError("User is not authenticated", {
+            extensions: {
+              code: "UNAUTHENTICATED",
+              http: { status: 401 },
+            },
+          });
+        }
 
         const userApi = new UserApi();
-        const user = await userApi.getUser("2");
+        const users = await userApi.getUsers({ discord_id: id });
+        const user = users[0];
 
         return { userApi, user };
       },

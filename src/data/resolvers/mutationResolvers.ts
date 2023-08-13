@@ -1,11 +1,7 @@
 import { Context } from "../../server";
 
 export const resolvers = {
-  createDiary: async (
-    _: any,
-    { userId, newDiary }: any,
-    { userApi }: Context
-  ) => {
+  createDiary: async (_root: any, { newDiary }: any, { userApi, userId }: Context) => {
     try {
       await userApi.getUser(userId);
     } catch (error) {
@@ -24,9 +20,7 @@ export const resolvers = {
     const res = await userApi.createDiary(diary);
     return res;
   },
-  updateDiary: async (_: any, args: any, { userApi }: Context) => {
-    const { id, data } = args;
-
+  updateDiary: async (_root: any, { id, data }: any, { userApi }: Context) => {
     const newData = {
       ...data,
       updatedAt: new Date().toISOString(),
@@ -36,15 +30,11 @@ export const resolvers = {
 
     return res;
   },
-  deleteDiary: async (_: any, { id }: any, { userApi }: Context) => {
+  deleteDiary: async (_root: any, { id }: any, { userApi }: Context) => {
     const res = await userApi.deleteDiary(id);
     return !!res;
   },
-  createWeekly: async (
-    _: any,
-    { userId, newWeekly }: any,
-    { userApi }: Context
-  ) => {
+  createWeekly: async (_root: any, { newWeekly }: any, { userApi, userId }: Context) => {
     try {
       await userApi.getUser(userId);
     } catch (error) {
@@ -63,9 +53,7 @@ export const resolvers = {
     const res = await userApi.createWeekly(weekly);
     return res;
   },
-  updateWeekly: async (_: any, args: any, { userApi }: Context) => {
-    const { id, data } = args;
-
+  updateWeekly: async (_root: any, { id, data }: any, { userApi }: Context) => {
     const newData = {
       ...data,
       updatedAt: new Date().toISOString(),
@@ -75,13 +63,11 @@ export const resolvers = {
 
     return res;
   },
-  deleteWeekly: async (_: any, { id }: any, { userApi }: Context) => {
+  deleteWeekly: async (_root: any, { id }: any, { userApi }: Context) => {
     const res = await userApi.deleteWeekly(id);
     return !!res;
   },
-  updateMetaIsCompleted: async (_: any, args: any, { userApi }: Context) => {
-    const { id, metaType } = args;
-
+  updateMetaIsCompleted: async (_root: any, { id, metaType }: any, { userApi }: Context) => {
     let newMeta;
 
     if (metaType === "diary") {

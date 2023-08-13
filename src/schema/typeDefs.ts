@@ -1,17 +1,17 @@
 export const userTypeDefs = `#graphql
   extend type Query {
-    user(id: String!): User!
+    user: User!
     users: [User!]!
-    diaries(userId: String!): [DiaryAndWeekly!]!
-    weeklies(userId: String!): [DiaryAndWeekly!]!
+    diaries: [DiaryAndWeekly!]!
+    weeklies: [DiaryAndWeekly!]!
   }
 
   extend type Mutation {
-    createDiary(userId:String!, newDiary: CreateDiaryInput!): DiaryAndWeekly!
+    createDiary(newDiary: CreateDiaryInput!): DiaryAndWeekly!
     updateDiary(id: String!, updatedDiary: UpdateDiaryInput!): DiaryAndWeekly!
     deleteDiary(id: String!): Boolean!
 
-    createWeekly(userId:String!, newWeekly: CreateWeeklyInput!): DiaryAndWeekly!
+    createWeekly(newWeekly: CreateWeeklyInput!): DiaryAndWeekly!
     updateWeekly(id: String!, updatedWeekly: UpdateWeeklyInput!): DiaryAndWeekly!
     deleteWeekly(id: String!): Boolean!
 
@@ -20,7 +20,6 @@ export const userTypeDefs = `#graphql
 
   type User {
     id: String!
-    discord_id: String!
     username: String!
     avatar: String!
     diaries: [DiaryAndWeekly!]!

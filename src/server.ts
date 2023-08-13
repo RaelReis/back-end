@@ -1,18 +1,18 @@
 import express from "express";
 import cors from "cors";
+import axios from "axios";
+import coockieParser from "cookie-parser";
+import { sign } from "jsonwebtoken";
+import { GraphQLError } from "graphql";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware as apolloMiddleware } from "@apollo/server/express4";
+import { authMiddleware } from "./middlewares/express";
 import { resolvers, typeDefs } from "./schema";
 import { UserApi } from "./data/dataSources/userApi";
-import axios from "axios";
-import { sign, verify } from "jsonwebtoken";
-import { User } from "./data/models/User";
-import coockieParser from "cookie-parser";
-import { GraphQLError } from "graphql";
 
 export interface Context {
   userApi: UserApi;
-  user: User;
+  userId: string;
 }
 
 export interface ReqUser {
@@ -31,26 +31,19 @@ const PORT = 4003;
 
 const app = express();
 
-const authMiddleware = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-  const token = req.cookies.token?.split(" ")[1];
-
-  try {
-    const { sub } = verify(token, process.env.JWT_SECRET as string) as { sub: string };
-    req.user = { id: sub };
-  } catch (error) {
-    req.user = { id: null };
-  }
-
-  next();
-};
-
-app.use(cors(), express.json(), coockieParser());
-
 const apolloServer = new ApolloServer<Context>({
   typeDefs,
   resolvers,
-  introspection: true,
 });
+
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Substitua pelo seu domínio
+    credentials: true, // Permite credenciais (cookies, etc.)
+  }),
+  express.json(),
+  coockieParser()
+);
 
 app.get("/auth/discord/login", (req, res) => {
   const url =
@@ -90,13 +83,13 @@ app.get("/auth/discord/callback", async (req, res) => {
 
   const users = await userApi.getUsers({});
 
-  const checkIfUserExists = users.some((user) => user.discord_id === id);
+  const checkIfUserExists = users.some((user) => user.id === id);
 
   if (!checkIfUserExists) {
     const newUser = {
-      discord_id: id,
+      id: id,
       username,
-      avatar,
+      avatar: `https://cdn.discordapp.com/avatars/${id}/${avatar}.png`,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
@@ -127,11 +120,7 @@ apolloServer.start().then(() => {
           });
         }
 
-        const userApi = new UserApi();
-        const users = await userApi.getUsers({ discord_id: id });
-        const user = users[0];
-
-        return { userApi, user };
+        return { userApi: new UserApi(), userId: id };
       },
     })
   );

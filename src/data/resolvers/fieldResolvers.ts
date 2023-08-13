@@ -1,11 +1,11 @@
 import { Context } from "../../server";
 
 const userFieldResolvers = {
-  diaries: async ({ id: userId }: any, _: any, { userApi }: Context) => {
+  diaries: async (_root: any, _: any, { userApi, userId }: Context) => {
     const diaries = await userApi.getDiaries(userId);
     return diaries;
   },
-  weeklies: async ({ id: userId }: any, _: any, { userApi }: Context) => {
+  weeklies: async (_root: any, _: any, { userApi, userId }: Context) => {
     const weeklies = await userApi.getWeeklies(userId);
     return weeklies;
   },

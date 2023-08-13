@@ -6,7 +6,7 @@
   "author": "kelon",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -r dotenv/config -r ts-node src/server.ts",
+    "dev": "nodemon --ignore db.json -r dotenv/config -r ts-node src/server.ts",
     "server:dev": "json-server -p 3002 --watch db.json"
   },
   "dependencies": {

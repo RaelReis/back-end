@@ -11,17 +11,16 @@ export class UserApi extends RESTDataSource {
 
   // Query's
   async getUser(id: string) {
-    return this.get<User>(`/users/${id}`, { cacheOptions: { ttl: 60 } });
+    return this.get<User>(`/users/${id}`);
   }
 
   async getUsers(params: Record<string, string>) {
-    return this.get<User[]>("/users", { params, cacheOptions: { ttl: 60 } });
+    return this.get<User[]>("/users", { params });
   }
 
   async getDiaries(userId: string) {
     return this.get<Diary[]>("/diaries", {
       params: { userId },
-      cacheOptions: { ttl: 60 },
     });
   }
 
@@ -44,7 +43,6 @@ export class UserApi extends RESTDataSource {
   async getWeeklies(userId: string) {
     return this.get<Weekly[]>("/weeklies", {
       params: { userId },
-      cacheOptions: { ttl: 60 },
     });
   }
 

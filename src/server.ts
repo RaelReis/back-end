@@ -47,7 +47,7 @@ app.use(
 
 app.get("/auth/discord/login", (req, res) => {
   const url =
-    "https://discord.com/api/oauth2/authorize?client_id=1139723744332501032&redirect_uri=https%3A%2F%2Fe1c1-2804-7f0-b780-97c8-854e-263f-d8dc-40b6.ngrok-free.app%2Fauth%2Fdiscord%2Fcallback&response_type=code&scope=identify";
+    "https://discord.com/api/oauth2/authorize?client_id=1139723744332501032&redirect_uri=http%3A%2F%2Flocalhost%3A4003%2Fauth%2Fdiscord%2Fcallback&response_type=code&scope=identify";
   res.redirect(301, url);
 });
 

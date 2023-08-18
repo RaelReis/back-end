@@ -37,7 +37,7 @@ const apolloServer = new ApolloServer<Context>({
 
 app.use(
   cors({
-    origin: "http://localhost:5173", // Substitua pelo seu domínio
+    origin: process.env.CLIENT_URL, // Substitua pelo seu domínio
     credentials: true, // Permite credenciais (cookies, etc.)
   }),
   express.json(),

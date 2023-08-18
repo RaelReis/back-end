@@ -46,7 +46,7 @@ app.use(
 
 app.get("/auth/discord/login", (req, res) => {
   const url =
-    "https://discord.com/api/oauth2/authorize?client_id=1139723744332501032&redirect_uri=http%3A%2F%2Flocalhost%3A4003%2Fauth%2Fdiscord%2Fcallback&response_type=code&scope=identify";
+    "https://discord.com/api/oauth2/authorize?client_id=1139723744332501032&redirect_uri=https%3A%2F%2Fback-end-kappa-five.vercel.app%2Fauth%2Fdiscord%2Fcallback&response_type=code&scope=identify";
   res.redirect(301, url);
 });
 
@@ -93,7 +93,7 @@ app.get("/auth/discord/callback", async (req, res) => {
   const token = await sign({ sub: id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
 
   res.cookie("token", `Bearer ${token}`);
-  res.redirect(301, "http://localhost:5173/home");
+  res.redirect(301, process.env.CLIENT_REDIRECT_URL || "");
 });
 
 apolloServer.start().then(() => {

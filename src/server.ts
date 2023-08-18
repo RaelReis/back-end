@@ -45,8 +45,7 @@ app.use(
 );
 
 app.get("/auth/discord/login", (req, res) => {
-  const url =
-    "https://discord.com/api/oauth2/authorize?client_id=1139723744332501032&redirect_uri=https%3A%2F%2Fblack-desert-meta-api.vercel.app%2Fauth%2Fdiscord%2Fcallback&response_type=code&scope=identify";
+  const url = process.env.DISCORD_AUTH_URL || "";
   res.redirect(301, url);
 });
 

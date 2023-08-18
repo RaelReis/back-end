@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.ts",
-    "vercel-build": "npx prisma migrate deploy"
+    "vercel-build": "npx prisma generate"
   },
   "dependencies": {
     "@apollo/datasource-rest": "^6.0.1",

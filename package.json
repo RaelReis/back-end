@@ -6,9 +6,7 @@
   "author": "kelon",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --ignore db.json -r dotenv/config -r ts-node src/server.ts",
-    "server:dev": "json-server -p 3002 --watch db.json",
-    "teste": "yarn run dev && yarn run server:dev"
+    "dev": "nodemon -r dotenv/config -r ts-node src/server.ts"
   },
   "dependencies": {
     "@apollo/datasource-rest": "^6.0.1",

@@ -15,7 +15,8 @@ export const userTypeDefs = `#graphql
     updateWeekly(id: String!, updatedWeekly: UpdateWeeklyInput!): DiaryAndWeekly!
     deleteWeekly(id: String!): Boolean!
 
-    updateMetaIsCompleted(id: String!, metaType: MetaTypeInput): DiaryAndWeekly!
+    updateDiaryIsCompleted(id: String!): DiaryAndWeekly!
+    updateWeeklyIsCompleted(id: String!): DiaryAndWeekly!
   }
 
   type User {

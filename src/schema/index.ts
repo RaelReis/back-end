@@ -1,7 +1,7 @@
 import { userTypeDefs } from "./typeDefs";
-import { queryResolvers } from "../data/resolvers/queryResolvers";
-import { fieldResolvers } from "../data/resolvers/fieldResolvers";
-import { mutationResolvers } from "../data/resolvers/mutationResolvers";
+import { queryResolvers } from "../resolvers/queryResolvers";
+import { fieldResolvers } from "../resolvers/fieldResolvers";
+import { mutationResolvers } from "../resolvers/mutationResolvers";
 
 const rootTypeDefs = `#graphql
   type Query {

@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id
+  username  String   @unique
+  avatar    String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  diaries   Diary[] // Relação um-para-muitos com Diaries
+  weeklies  Weekly[] // Relação um-para-muitos com Weeklies
+
+  @@map("users")
+}
+
+model Diary {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  resetDay    DateTime
+  userId      String
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("diaries")
+}
+
+model Weekly {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  resetDay    DateTime
+  userId      String
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@map("weeklies")
+}

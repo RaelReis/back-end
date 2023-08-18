@@ -6,13 +6,12 @@ import { sign } from "jsonwebtoken";
 import { GraphQLError } from "graphql";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware as apolloMiddleware } from "@apollo/server/express4";
+import { prismaClient } from "./database/primsaClient";
 import { authMiddleware } from "./middlewares/express";
 import { resolvers, typeDefs } from "./schema";
-import { UserApi } from "./data/dataSources/userApi";
 
 export interface Context {
-  userApi: UserApi;
-  userId: string;
+  id: string;
 }
 
 export interface ReqUser {
@@ -79,22 +78,16 @@ app.get("/auth/discord/callback", async (req, res) => {
 
   const { id, avatar, username } = userData;
 
-  const userApi = new UserApi();
+  const userAlreadyExists = await prismaClient.user.findFirst({ where: { id } });
 
-  const users = await userApi.getUsers({});
-
-  const checkIfUserExists = users.some((user) => user.id === id);
-
-  if (!checkIfUserExists) {
+  if (!userAlreadyExists) {
     const newUser = {
-      id: id,
+      id,
       username,
       avatar: `https://cdn.discordapp.com/avatars/${id}/${avatar}.png`,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
     };
 
-    await userApi.createUser(newUser);
+    await prismaClient.user.create({ data: newUser });
   }
 
   const token = await sign({ sub: id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
@@ -120,7 +113,7 @@ apolloServer.start().then(() => {
           });
         }
 
-        return { userApi: new UserApi(), userId: id };
+        return { id };
       },
     })
   );

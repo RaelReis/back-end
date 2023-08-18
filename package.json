@@ -6,7 +6,8 @@
   "author": "kelon",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon -r dotenv/config -r ts-node src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "vercel-build": "npx prisma migrate deploy"
   },
   "dependencies": {
     "@apollo/datasource-rest": "^6.0.1",

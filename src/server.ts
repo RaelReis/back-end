@@ -92,7 +92,7 @@ app.get("/auth/discord/callback", async (req, res) => {
 
   const token = await sign({ sub: id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
 
-  res.cookie("token", `Bearer ${token}`);
+  res.cookie("token", `Bearer ${token}`, { sameSite: "lax" });
   res.redirect(301, process.env.CLIENT_REDIRECT_URL || "");
 });
 

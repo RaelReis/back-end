@@ -100,7 +100,9 @@ export const resolvers = {
     };
 
     const res = await prismaClient.daily.update({
-      where: id,
+      where: {
+        id: id,
+      },
       data,
     });
 

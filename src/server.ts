@@ -98,6 +98,95 @@ app.get("/auth/discord/callback", async (req, res) => {
   res.redirect(301, process.env.CLIENT_REDIRECT_URL || "");
 });
 
+// app.get("/view", async (req, res) => {
+//   await prismaClient.drop.deleteMany();
+//   return res.json({});
+// });
+
+// app.get("/teste", async (_, res) => {
+//   readFile("data.json", "utf-8", async (err, dataJson) => {
+//     if (err) {
+//       console.error("Erro ao ler o JSON", err);
+//       return;
+//     }
+
+//     try {
+//       const data = JSON.parse(dataJson);
+
+//       // const toSendSpots = data.map((spot: { spot: any; spot_image: WithImplicitCoercion<string> | { [Symbol.toPrimitive](hint: "string"): string; }; }) => ({ name: spot.spot, image: Buffer.from(spot.spot_image, "base64") }));
+
+//       // const spots = await prismaClient.spot.createMany({
+//       //   data: toSendSpots,
+//       // });
+
+//       const _spots = (await prismaClient.spot.findMany()).map((spot) => ({ id: spot.id, name: spot.name }));
+
+//       console.log(_spots);
+
+//       let count = 0;
+//       let newDropList: any[] = [];
+
+//       data.map((spotInfo: { spot: string; dropList: any[] }) =>
+//         spotInfo.dropList.map((drop) => {
+//           const spotIndex = _spots.findIndex((spot) => spot.name === spotInfo.spot);
+//           const spotId = _spots[spotIndex].id;
+
+//           newDropList.push({
+//             ...drop,
+//             spotId,
+//             price: +drop.price,
+//             image: Buffer.from(drop.image, "base64"),
+//           });
+//         })
+//       );
+
+//       const _dropsAlreadyExists = await prismaClient.drop.findMany();
+//       let dropsAlreadyExists = _dropsAlreadyExists.map((drop) => drop.name);
+
+//       async function postDrops() {
+//         for (const drop of newDropList) {
+//           console.log("Vou conectar", drop.name, "no spot id", drop.spotId);
+
+//           if (dropsAlreadyExists.includes(drop.name)) {
+//             await prismaClient.drop.update({
+//               where: {
+//                 name: drop.name,
+//               },
+//               data: {
+//                 spots: {
+//                   connect: [{ id: drop.spotId }],
+//                 },
+//               },
+//             });
+//             count++;
+//             continue;
+//           }
+
+//           const res = await prismaClient.drop.create({
+//             data: {
+//               name: drop.name,
+//               image: drop.image,
+//               price: drop.price,
+//               tax: drop.tax,
+//               spots: {
+//                 connect: [{ id: drop.spotId }],
+//               },
+//             },
+//           });
+//           dropsAlreadyExists.push(res.name);
+//           count++;
+//         }
+//       }
+
+//       postDrops();
+
+//       return res.json({});
+//     } catch (error) {
+//       console.error("Erro no parse do JSON", error);
+//     }
+//   });
+// });
+
 apolloServer.start().then(() => {
   app.use(
     "/graphql",

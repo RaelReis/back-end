@@ -16,8 +16,8 @@ model User {
   avatar    String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  dailies   Daily[] // Relação um-para-muitos com Diaries
-  weeklies  Weekly[] // Relação um-para-muitos com Weeklies
+  dailies   Daily[]
+  weeklies  Weekly[]
   goals     Goal[]
 
   @@map("users")
@@ -105,7 +105,7 @@ model DropsOnSpots {
   spot   Spot   @relation(fields: [spotId], references: [id])
   spotId String
   drop   Drop   @relation(fields: [dropId], references: [id])
-  dropId String // relation scalar field (used in the `@relation` attribute above)
+  dropId String
 
   @@id([spotId, dropId])
 }

@@ -1,35 +1,42 @@
 export const userTypeDefs = `#graphql
+
+  scalar Buffer
+
   extend type Query {
     user: User!
     users: [User!]!
-    diaries: [DiaryAndWeekly!]!
-    weeklies: [DiaryAndWeekly!]!
+    dailies: [DailyAndWeekly!]!
+    weeklies: [DailyAndWeekly!]!
+    item(id:String!): Item!
+    items: [Item!]!
+    spot(id: String!): Spot!
+    spots: [Spot!]!
   }
 
   extend type Mutation {
-    createDiary(newDiary: CreateDiaryInput!): DiaryAndWeekly!
-    updateDiary(id: String!, updatedDiary: UpdateDiaryInput!): DiaryAndWeekly!
-    deleteDiary(id: String!): Boolean!
+    createDaily(newDaily: CreateDailyInput!): DailyAndWeekly!
+    updateDaily(id: String!, updatedDaily: UpdateDailyInput!): DailyAndWeekly!
+    deleteDaily(id: String!): Boolean!
 
-    createWeekly(newWeekly: CreateWeeklyInput!): DiaryAndWeekly!
-    updateWeekly(id: String!, updatedWeekly: UpdateWeeklyInput!): DiaryAndWeekly!
+    createWeekly(newWeekly: CreateWeeklyInput!): DailyAndWeekly!
+    updateWeekly(id: String!, updatedWeekly: UpdateWeeklyInput!): DailyAndWeekly!
     deleteWeekly(id: String!): Boolean!
 
-    updateDiaryIsCompleted(id: String!): DiaryAndWeekly!
-    updateWeeklyIsCompleted(id: String!): DiaryAndWeekly!
+    updateDailyIsCompleted(id: String!): DailyAndWeekly!
+    updateWeeklyIsCompleted(id: String!): DailyAndWeekly!
   }
 
   type User {
     id: String!
     username: String!
     avatar: String!
-    diaries: [DiaryAndWeekly!]!
-    weeklies: [DiaryAndWeekly!]!
+    dailies: [DailyAndWeekly!]!
+    weeklies: [DailyAndWeekly!]!
     createdAt: String!
     updatedAt: String!
   }
 
-  type DiaryAndWeekly {
+  type DailyAndWeekly {
     id: String!
     userId: String!
     title: String!
@@ -40,18 +47,46 @@ export const userTypeDefs = `#graphql
     updatedAt: String!
   }
 
+  type Spot {
+    id: String!
+    name: String!
+    image: Buffer
+    drops: [Drop!]!
+  }
+
+  type Drop {
+    id: String!
+    name: String!
+    image: Buffer
+    price: Int!
+    tax: Boolean!
+  }
+
+  type Item {
+    id: String!
+    name: String!
+    image: Buffer
+    type: ItemType!
+  }
+
+  enum ItemType {
+    accessory
+    weapon
+    armor
+  }
+
   enum MetaTypeInput {
-    diary
+    daily
     weekly
   }
 
-  input CreateDiaryInput {
+  input CreateDailyInput {
     title: String!
     description: String!
     resetDay: String!
   }
 
-  input UpdateDiaryInput {
+  input UpdateDailyInput {
     title: String
     description: String
     resetDay: String

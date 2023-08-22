@@ -7,7 +7,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
   const token = bearer?.split(" ")[1];
 
   try {
-    const { sub } = (await verify(token, process.env.JWT_SECRET as string)) as { sub: string };
+    const { sub } = verify(token, process.env.JWT_SECRET as string) as { sub: string };
     req.user = { id: sub };
   } catch (error) {
     req.user = { id: null };
@@ -15,5 +15,3 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
 
   next();
 };
-
-

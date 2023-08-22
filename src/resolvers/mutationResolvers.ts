@@ -2,7 +2,7 @@ import { prismaClient } from "../database/primsaClient";
 import { Context } from "../server";
 
 export const resolvers = {
-  createDiary: async (_root: any, { newDiary }: any, { id }: Context) => {
+  createDaily: async (_root: any, { newDaily }: any, { id }: Context) => {
     const userExists = await prismaClient.user.findFirst({
       where: {
         id,
@@ -14,19 +14,19 @@ export const resolvers = {
     }
 
     // Back end fara isso automaticamente depois
-    const diary = {
-      ...newDiary,
+    const daily = {
+      ...newDaily,
       userId: id,
     };
 
-    const res = await prismaClient.diary.create({
-      data: diary,
+    const res = await prismaClient.daily.create({
+      data: daily,
     });
 
     return res;
   },
-  updateDiary: async (_root: any, { id, data }: any) => {
-    const res = await prismaClient.diary.update({
+  updateDaily: async (_root: any, { id, data }: any) => {
+    const res = await prismaClient.daily.update({
       where: {
         id,
       },
@@ -35,8 +35,8 @@ export const resolvers = {
 
     return res;
   },
-  deleteDiary: async (_root: any, { id }: any) => {
-    await prismaClient.diary.delete({
+  deleteDaily: async (_root: any, { id }: any) => {
+    await prismaClient.daily.delete({
       where: {
         id,
       },
@@ -85,21 +85,21 @@ export const resolvers = {
     });
     return true;
   },
-  updateDiaryIsCompleted: async (_root: any, { id }: any) => {
-    const toUpdateDiary = await prismaClient.diary.findFirst({
+  updateDailyIsCompleted: async (_root: any, { id }: any) => {
+    const toUpdateDaily = await prismaClient.daily.findFirst({
       where: id,
     });
 
-    if (!toUpdateDiary) {
-      throw new Error(`Diary ID not found`);
+    if (!toUpdateDaily) {
+      throw new Error(`Daily ID not found`);
     }
 
     const data = {
-      ...toUpdateDiary,
-      isCompleted: !toUpdateDiary.isCompleted,
+      ...toUpdateDaily,
+      isCompleted: !toUpdateDaily.isCompleted,
     };
 
-    const res = await prismaClient.diary.update({
+    const res = await prismaClient.daily.update({
       where: id,
       data,
     });
@@ -112,7 +112,7 @@ export const resolvers = {
     });
 
     if (!toUpdateWeekly) {
-      throw new Error(`Diary ID not found`);
+      throw new Error(`Daily ID not found`);
     }
 
     const data = {
@@ -120,7 +120,7 @@ export const resolvers = {
       isCompleted: !toUpdateWeekly.isCompleted,
     };
 
-    const res = await prismaClient.diary.update({
+    const res = await prismaClient.daily.update({
       where: id,
       data,
     });

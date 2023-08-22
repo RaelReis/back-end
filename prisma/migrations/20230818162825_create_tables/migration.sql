@@ -10,7 +10,7 @@ CREATE TABLE "users" (
 );
 
 -- CreateTable
-CREATE TABLE "diaries" (
+CREATE TABLE "dailies" (
     "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE "diaries" (
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "diaries_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "dailies_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -44,7 +44,7 @@ CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
 CREATE UNIQUE INDEX "users_avatar_key" ON "users"("avatar");
 
 -- AddForeignKey
-ALTER TABLE "diaries" ADD CONSTRAINT "diaries_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "dailies" ADD CONSTRAINT "dailies_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "weeklies" ADD CONSTRAINT "weeklies_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -16,13 +16,13 @@ model User {
   avatar    String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  diaries   Diary[] // Relação um-para-muitos com Diaries
+  dailies   Daily[] // Relação um-para-muitos com Diaries
   weeklies  Weekly[] // Relação um-para-muitos com Weeklies
 
   @@map("users")
 }
 
-model Diary {
+model Daily {
   id          String   @id @default(uuid())
   title       String
   description String
@@ -33,7 +33,7 @@ model Diary {
   updatedAt   DateTime @updatedAt
   user        User     @relation(fields: [userId], references: [id])
 
-  @@map("diaries")
+  @@map("dailies")
 }
 
 model Weekly {
@@ -48,4 +48,50 @@ model Weekly {
   user        User     @relation(fields: [userId], references: [id])
 
   @@map("weeklies")
+}
+
+enum ItemTypes {
+  accessory
+  weapon
+  armor
+}
+
+model Item {
+  id    String    @id @default(uuid())
+  name  String    @unique
+  image Bytes
+  type  ItemTypes
+
+  @@map("items")
+}
+
+model Spot {
+  id           String         @id @default(uuid())
+  name         String         @unique
+  image        Bytes
+  drops        Drop[]
+  DropsOnSpots DropsOnSpots[]
+
+  @@map("spots")
+}
+
+model Drop {
+  id           String         @id @default(uuid())
+  name         String         @unique
+  price        Int
+  image        Bytes
+  tax          Boolean
+  spots        Spot[]
+  DropsOnSpots DropsOnSpots[]
+
+  @@map("drops")
+}
+
+model DropsOnSpots {
+  spot   Spot   @relation(fields: [spotId], references: [id])
+  spotId String
+  drop   Drop   @relation(fields: [dropId], references: [id])
+  dropId String // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([spotId, dropId])
 }

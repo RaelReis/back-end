@@ -7,8 +7,12 @@ import { GraphQLError } from "graphql";
 import { ApolloServer } from "@apollo/server";
 import { expressMiddleware as apolloMiddleware } from "@apollo/server/express4";
 import { prismaClient } from "./database/primsaClient";
-import { authMiddleware } from "./middlewares/express";
+import { authMiddleware } from "./middlewares/auth";
 import { resolvers, typeDefs } from "./schema";
+import "./utils/schedule";
+
+import { Buffer } from "buffer";
+import { readFile } from "fs";
 
 export interface Context {
   id: string;
@@ -91,7 +95,7 @@ app.get("/auth/discord/callback", async (req, res) => {
 
   const token = await sign({ sub: id }, process.env.JWT_SECRET as string, { expiresIn: "7d" });
 
-  const cookieExpires = 60 * 60 * 24 * 7; // 7 days
+  const cookieExpires = 60 * 60 * 24 * 30; // 30 days
 
   res.cookie("token", `Bearer ${token}`, { sameSite: "none", secure: true, maxAge: cookieExpires });
   res.redirect(301, process.env.CLIENT_REDIRECT_URL || "");

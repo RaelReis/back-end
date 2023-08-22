@@ -11,9 +11,6 @@ import { authMiddleware } from "./middlewares/auth";
 import { resolvers, typeDefs } from "./schema";
 import "./utils/schedule";
 
-import { Buffer } from "buffer";
-import { readFile } from "fs";
-
 export interface Context {
   id: string;
 }

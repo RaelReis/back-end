@@ -8,11 +8,29 @@ const resolvers = {
       where: {
         id,
       },
+      include: {
+        goals: {
+          include: {
+            item: true,
+          },
+        },
+      },
     });
-    return user;
+
+    return {
+      ...user,
+      goals: user!.goals.map((goal) => ({
+        ...goal,
+        item: { ...goal.item, image: createUrlFromBuffer(goal.item.image) },
+      })),
+    };
   },
   users: async () => {
-    const users = await prismaClient.user.findMany();
+    const users = await prismaClient.user.findMany({
+      include: {
+        goals: true,
+      },
+    });
     return users;
   },
   dailies: async (_root: any, _args: any, { id }: Context) => {

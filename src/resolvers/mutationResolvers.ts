@@ -44,7 +44,7 @@ export const resolvers = {
     return true;
   },
   createWeekly: async (_root: any, { newWeekly }: any, { id }: Context) => {
-    console.log('to executando o create weekly')
+    console.log("to executando o create weekly");
     const userExists = await prismaClient.user.findFirst({
       where: {
         id,
@@ -126,6 +126,19 @@ export const resolvers = {
     });
 
     return res;
+  },
+  createGoal: async (__root: any, { itemId }: any, { id }: Context) => {
+    const goal = await prismaClient.goal.create({
+      data: {
+        itemId: itemId,
+        userId: id,
+      },
+      include: {
+        item: true,
+      },
+    });
+
+    return goal;
   },
 };
 

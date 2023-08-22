@@ -18,6 +18,7 @@ model User {
   updatedAt DateTime @updatedAt
   dailies   Daily[] // Relação um-para-muitos com Diaries
   weeklies  Weekly[] // Relação um-para-muitos com Weeklies
+  goals     Goal[]
 
   @@map("users")
 }
@@ -50,6 +51,16 @@ model Weekly {
   @@map("weeklies")
 }
 
+model Goal {
+  id     String @id @default(uuid())
+  itemId String
+  userId String
+  item   Item   @relation(fields: [itemId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@map("goals")
+}
+
 enum ItemTypes {
   accessory
   weapon
@@ -60,7 +71,10 @@ model Item {
   id    String    @id @default(uuid())
   name  String    @unique
   image Bytes
+  price Int       @default(1000000000)
+  tier  Int
   type  ItemTypes
+  Goal  Goal[]
 
   @@map("items")
 }

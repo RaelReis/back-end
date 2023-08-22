@@ -24,6 +24,8 @@ export const userTypeDefs = `#graphql
 
     updateDailyIsCompleted(id: String!): DailyAndWeekly!
     updateWeeklyIsCompleted(id: String!): DailyAndWeekly!
+
+    createGoal(itemId: String!): Goal!
   }
 
   type User {
@@ -32,6 +34,7 @@ export const userTypeDefs = `#graphql
     avatar: String!
     dailies: [DailyAndWeekly!]!
     weeklies: [DailyAndWeekly!]!
+    goals: [Goal!]!
     createdAt: String!
     updatedAt: String!
   }
@@ -65,8 +68,15 @@ export const userTypeDefs = `#graphql
   type Item {
     id: String!
     name: String!
+    price: Int!
+    tier: Int!
     image: Buffer
     type: ItemType!
+  }
+
+  type Goal {
+    id: String!
+    item: Item!
   }
 
   enum ItemType {

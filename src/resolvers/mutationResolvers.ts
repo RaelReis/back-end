@@ -87,7 +87,9 @@ export const resolvers = {
   },
   updateDailyIsCompleted: async (_root: any, { id }: any) => {
     const toUpdateDaily = await prismaClient.daily.findFirst({
-      where: id,
+      where: {
+        id: id,
+      },
     });
 
     if (!toUpdateDaily) {
@@ -110,7 +112,9 @@ export const resolvers = {
   },
   updateWeeklyIsCompleted: async (_root: any, { id }: any) => {
     const toUpdateWeekly = await prismaClient.weekly.findFirst({
-      where: id,
+      where: {
+        id: id,
+      },
     });
 
     if (!toUpdateWeekly) {
@@ -123,7 +127,9 @@ export const resolvers = {
     };
 
     const res = await prismaClient.daily.update({
-      where: id,
+      where: {
+        id: id,
+      },
       data,
     });
 
